@@ -1,0 +1,38 @@
+//components
+@import '{}/imports/components/nav/nav.scss';
+//pages
+@import '{}/imports/pages/about/about.scss';
+// @import '{}/imports/pages/contact/contact.scss';
+@import '{}/imports/pages/home/home.scss';
+// @import '{}/imports/pages/policy/policy.scss';
+
+body{
+  height: 100vh;
+  .page-wrapper{
+    background: url('/musicBG.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow-y: scroll;
+  }
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.transparent-1{
+  background-color: rgba(255,255,255,.3);
+}
+
+.transparent-2{
+  background-color: rgba(255,255,255,.8);
+}
+
+.border-3{
+  border-style: solid;
+  border-width: 3px!important;
+}
+
+.border-5{
+  border-style: solid;
+  border-width: 5px!important;
+}
