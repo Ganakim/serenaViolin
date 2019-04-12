@@ -2,15 +2,44 @@
   <title>Serena Violin Studio</title>
   <link rel="icon" sizes="16x16 32x32" href="/favicon.ico?v=2">
   
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <div class="d-flex h-100 text-dark">
+  <div class="d-flex align-items-stretch text-dark position-relative">
+    <!-- Colors should be customized -->
+    <!-- Mobile responsiveness? -->
+    <!-- Admin-style login to look at messages? -->
+    <!-- Social media? -->
     {{>nav page=page}}
-    <div class="w-100 page-wrapper">
+    <div class="d-flex flex-column w-100 page-wrapper">
       {{>Template.dynamic template=page}}
+      <div class="bg-dark text-light p-3">PLACEHOLDER</div>
     </div>
+    {{#if modal}}
+      {{#with modal}}
+        <div id="Modal" class="w-100 h-100 transparent-2 d-flex justify-content-center align-items-start position-absolute pt-5">
+          <div class="card mt-5 w-25">
+            <div class="card-body w-100">
+              <div class="p-4 w-100 d-flex justify-content-center">
+                {{message}}
+              </div>
+              <div class="d-flex justify-content-around">
+                <div id="ModalConfirm" class="btn btn-primary w-25 m-3">
+                  {{confirm}}
+                </div>
+                <div id="ModalDeny" class="btn btn-light w-25 m-3">
+                  {{deny}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/with}}
+    {{/if}}
   </div>
 </body>

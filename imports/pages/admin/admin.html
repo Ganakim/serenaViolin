@@ -1,0 +1,153 @@
+<template name="admin">
+  {{checkAdmin}}
+    <div class="admin d-flex w-100 f-1 bg-light">
+      <div class="d-flex flex-column">
+        {{#each adminLinks}}
+          <div class="adminLink">{{this}}</div>
+        {{/each}}
+      </div>
+      <div class="d-flex flex-column w-100">
+        <div id="Messages" class="adminTab p-4 h-0">
+          {{#if search "Messages" false false false}}
+            {{#each search "Messages" false false false}}
+              <div id="{{_id}}" class="d-flex flex-column border border-rounded">
+                <div class="d-flex msgHead m-2 pointer">
+                  <div class="mr-1">
+                    {{name.first}}
+                  </div>
+                  <div>
+                    {{name.last}}
+                  </div>
+                  <div class="mx-1">-</div>
+                  <div>
+                    {{subject}}
+                  </div>
+                </div>
+                <div class="msgBody h-0 px-2 pb-2">
+                  <hr class="w-100 my-1">
+                  <div class="pt-2">
+                    {{message}}
+                  </div>
+                  <div class="d-flex mt-2">
+                    <a target="_blank" href="mailto:{{email}}?subject={{subject}}">Reply</a>
+                    <div class="ml-2 btn-link pointer msgDelete">Delete</div>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+              <div>No messages, you're all caught up. Hooray!</div>
+          {{/if}}
+        </div>
+
+        <div id="Events" class="adminTab d-flex align-items-stretch p-4 h-0">
+          <div class="d-flex flex-column bg-white m-3 p-2">
+            {{#if search "Events" false false false}}
+              {{#each search "Events" false false false}}
+                <div class="d-flex justify-content-between pointer border-bottom eventBtn {{#if is selectedEvent._id _id}}bg-primary{{/if}}">
+                  <div>{{name}}</div>
+                  <div class="mx-2">-</div>
+                  <div>{{formatTime date "MM / DD / YYYY"}}</div>
+                </div>
+              {{/each}}
+            {{else}}
+                <div class="border-bottom">No events, Why not plan something amazing?</div>
+            {{/if}}
+            <div id="ClearEvent" class="btn btn-primary mt-5">
+              New Event
+            </div>
+          </div>
+          <form id="AddEvent" class="f-1">
+            <div class="form-group">
+              <label class="m-0">Name:</label>
+              <input type="text" class="form-control ml-1" id="Name" placeholder="Name" value="{{selectedEvent.name}}">
+            </div>
+            <div class="form-group">
+              <label class="m-0">Date:</label>
+              <input type="date" class="form-control p-0 position-relative" id="Date" value="{{selectedEvent.date}}">
+            </div>
+            <div class="form-group">
+              <label class="m-0">Location:</label>
+              <input type="text" class="form-control ml-1" id="Location" placeholder="Location" value="{{selectedEvent.location}}">
+            </div>
+            <div class="form-group">
+              <label class="m-0">Description:</label>
+              <textarea rows="8" class="form-control" id="Description" placeholder="What's this all about">{{selectedEvent.description}}</textarea>
+            </div>
+            {{#if selectedEvent}}
+              <div class="d-flex">
+                <button type="submit" id="UpdateEvent" class="btn btn-primary text-white">Update Event</button>
+                <button type="submit" id="RemoveEvent" class="btn btn-danger text-white">Remove Event</button>
+              </div>
+            {{else}}
+              <button type="submit" id="NewEvent" class="btn btn-primary">Add Event</button>
+            {{/if}}
+          </form>
+        </div>
+
+        <div id="Media" class="adminTab d-flex align-items-stretch p-4 h-100">
+          <div class="d-flex flex-column bg-white m-3 p-2">
+            {{#if search "Media" false false false}}
+              {{#each search "Media" false false false}}
+                <div class="d-flex justify-content-between pointer meidaBtn {{#if is selectedMedia._id _id}}bg-primary{{/if}}">
+                  <div>{{src}}</div>
+                  <div class="mx-2">-</div>
+                  <div>{{formatTime date "MM / DD / YYYY"}}</div>
+                </div>
+              {{/each}}
+            {{else}}
+                <div class="border-bottom">No media, The server is likely having issues.</div>
+            {{/if}}
+            <div id="ClearMedia" class="btn btn-primary mt-5">
+              Add Media
+            </div>
+          </div>
+          <form id="AddMedia" class="f-1">
+            <div class="form-group">
+              <label class="m-0">Source:</label>
+              <input type="text" class="form-control ml-1" id="Src" placeholder="Source" value="{{selectedMedia.src}}">
+            </div>
+            <div class="form-group">
+              <label class="m-0">Preview:</label>
+              {{#if is previewSrc.type "img"}}
+                <img src="{{previewSrc.src}}" width="50%">
+              {{else}}
+                {{#if is previewSrc.type "vid"}}
+                  <video src="{{previewSrc.src}}" width="50%"></video>
+                {{/if}}
+              {{/if}}
+            </div>
+            <div class="form-group">
+              <label class="m-0">Event:</label>
+              <select>
+                <option>None</option>
+                {{#each search "Events" false false false}}
+                  {{#if is selectedMedia._id _id}}
+                    <option selected>{{name}} - {{date}}</option>
+                  {{else}}
+                    <option>{{name}} - {{date}}</option>
+                  {{/if}}
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="m-0">Date:</label>
+              <input type="date" class="form-control p-0 position-relative" id="Date" value="{{selectedMedia.date}}">
+            </div>
+            <div class="form-group">
+              <label class="m-0">Description:</label>
+              <textarea rows="8" class="form-control" id="Description" placeholder="What's this all about">{{selectedMedia.description}}</textarea>
+            </div>
+            {{#if selectedMedia}}
+              <div class="d-flex">
+                <button type="submit" id="UpdateMedia" class="btn btn-primary text-white">Update Media</button>
+                <button type="submit" id="RemoveMedia" class="btn btn-danger text-white">Remove Media</button>
+              </div>
+            {{else}}
+              <button type="submit" id="NewMedia" class="btn btn-primary">Add Media</button>
+            {{/if}}
+          </form>
+        </div>
+      </div>
+    </div>
+</template>

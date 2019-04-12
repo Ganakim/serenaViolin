@@ -1,0 +1,29 @@
+.admin{
+  .h-0{
+    overflow: hidden;
+    height: 0!important;
+    padding: 0!important;
+    margin: 0!important;
+  }
+
+  #Date::-webkit-datetime-edit-fields-wrapper{
+    margin-left: 12px;
+    
+  }
+  #Date::-webkit-datetime-edit-month-field{
+    user-select: none;
+  }
+  #Date::-webkit-datetime-edit-text{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  #Date::-webkit-inner-spin-button{
+    display: none;
+  }
+  #Date::-webkit-calendar-picker-indicator{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}

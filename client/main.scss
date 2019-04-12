@@ -2,21 +2,35 @@
 @import '{}/imports/components/nav/nav.scss';
 //pages
 @import '{}/imports/pages/about/about.scss';
+@import '{}/imports/pages/admin/admin.scss';
 // @import '{}/imports/pages/contact/contact.scss';
 @import '{}/imports/pages/home/home.scss';
-// @import '{}/imports/pages/policy/policy.scss';
+//Bootstrap overrides
+$theme-colors: (
+  "primary": #6eaef7,
+  "danger": #ff4136
+);
+.btn-primary{
+  color: #fff!important;
+}
+@import '{}/client/bootstrap/bootstrap.scss';
 
 body{
-  height: 100vh;
   .page-wrapper{
     background: url('/musicBG.jpg') no-repeat center center fixed;
     background-size: cover;
-    overflow-y: scroll;
+  }
+  #Modal{
+    z-index: 100;
   }
 }
 
 .pointer{
   cursor: pointer;
+}
+
+.f-1{
+  flex: 1;
 }
 
 .transparent-1{
@@ -35,4 +49,8 @@ body{
 .border-5{
   border-style: solid;
   border-width: 5px!important;
+}
+
+.text-faded{
+  color: rgba(0, 0, 0, .2)
 }

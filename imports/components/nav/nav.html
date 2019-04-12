@@ -1,12 +1,15 @@
 <template name="nav">
-  <div class="nav bg-light shadow d-flex flex-column align-items-center h-100">
-    <div class="SC-logo d-flex justify-content-center align-items-center rounded-circle m-5 border-5 border-primary">
+  <div class="nav bg-light shadow d-flex flex-column align-items-center">
+    <!-- Replace with an image, or work on the detail a bit more -->
+    <div class="SC-logo pointer d-flex justify-content-center align-items-center rounded-circle m-5 border-5 border-primary">
       <h1 class="text-primary mb-0">SVS</h1>
     </div>
+    <!-- Add a link for media? -->
+    <!-- Contact icon as email? -->
     {{#each links}}
       <div class="nav-link pointer text-right mb-3 w-100 {{#if is path ../page}}bg-primary text-light{{else}}bg-light text-muted{{/if}}">
         {{text}}
-        <i class="fas fa-{{icon}} ml-2"></i>
+        <i class="{{icon}} ml-2"></i>
       </div>
     {{/each}}
   </div>
