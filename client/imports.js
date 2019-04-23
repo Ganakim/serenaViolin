@@ -4,6 +4,7 @@ import '/lib/routes'
 import '/lib/tools'
 //components
 import '/imports/components/nav/nav'
+import '/imports/components/calendar/calendar'
 //pages
 import '/imports/pages/about/about'
 import '/imports/pages/admin/admin'

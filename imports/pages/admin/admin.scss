@@ -6,9 +6,11 @@
     margin: 0!important;
   }
 
+  #Date:invalid::-webkit-datetime-edit {
+    color: #6c757d;
+  }
   #Date::-webkit-datetime-edit-fields-wrapper{
     margin-left: 12px;
-    
   }
   #Date::-webkit-datetime-edit-month-field{
     user-select: none;

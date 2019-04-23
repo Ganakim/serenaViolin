@@ -1,0 +1,44 @@
+<template name="calendar">
+  <div class="calendar card">
+    <div class="card-header">
+      <h2 class="f-1 d-flex justify-content-between px-5 mb-0">
+          <i id="PrevMonth" class="fas fa-angle-left pointer mx-5"></i>
+          {{formatTime month "MMMM"}}
+          <i id="NextMonth" class="fas fa-angle-right pointer mx-5"></i>
+      </h2>
+    </div>
+    <div class="card-body flex-column">
+      <div class="border">
+        <div class="d-flex">
+          {{#each weekDays}}
+            <div class="f-1 weekday border">
+              {{this}}
+            </div>
+          {{/each}}
+        </div>
+        {{#each loop 6}}
+        <div class="d-flex">
+          {{#each week @index}}
+            <div class="d-flex flex-column f-1">
+              <div class="weekday border">
+                <div class="dayNumber {{#if today this}}text-primary border border-primary font-italic font-weight-bold{{/if}} d-flex justify-content-center my-1 align-items-center rounded-circle">
+                  {{formatTime this "D"}}
+                </div>
+              </div>
+              <div class="f-1 position-relative pointer border day d-flex flex-column px-2 py-1">
+                {{#each events this}}
+                  <div class="d-flex w-100">
+                    <div style="{{eventMargins this}}" class="d-flex f-1 mb-1 p-1 rounded bg-primary text-white"></div>
+                  </div>
+                {{/each}}
+                {{#if isSelectedDate this}}<div class="CDoverlay border border-primary"></div>{{/if}}
+                {{#if outOfMonth this}}<div class="OOMoverlay"></div>{{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>  
+</template>

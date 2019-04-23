@@ -40,9 +40,12 @@ Meteor.publish('events', ()=>{
     fields: {
       name: 1,
       date: 1,
+      startTime: 1,
+      endTime: 1,
       location: 1,
       description: 1
-    }
+    },
+    sort:{date: 1}
   })
 })
 
@@ -57,7 +60,8 @@ Meteor.publish('media', ()=>{
       description: 1,
       date: 1,
       externalLinks: 1
-     }
+     },
+     sort:{date: 1}
   })
 })
 
@@ -69,6 +73,7 @@ Meteor.publish('messages', ()=>{
       subject: 1,
       message: 1,
       timestamp: 1
-     }
+     },
+     sort:{timestamp: 1}
   })
 })

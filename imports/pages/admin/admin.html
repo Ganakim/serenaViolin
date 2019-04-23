@@ -3,11 +3,11 @@
     <div class="admin d-flex w-100 f-1 bg-light">
       <div class="d-flex flex-column">
         {{#each adminLinks}}
-          <div class="adminLink">{{this}}</div>
+          <div id="{{this}}Btn" class="btn btn-light m-2 adminLink {{#if is this 'Messages'}}bg-primary text-white{{/if}}">{{this}}</div>
         {{/each}}
       </div>
       <div class="d-flex flex-column w-100">
-        <div id="Messages" class="adminTab p-4 h-0">
+        <div id="Messages" class="adminTab p-4 h-100">
           {{#if search "Messages" false false false}}
             {{#each search "Messages" false false false}}
               <div id="{{_id}}" class="d-flex flex-column border border-rounded">
@@ -60,15 +60,57 @@
           <form id="AddEvent" class="f-1">
             <div class="form-group">
               <label class="m-0">Name:</label>
-              <input type="text" class="form-control ml-1" id="Name" placeholder="Name" value="{{selectedEvent.name}}">
+              <input type="text" class="form-control ml-1" id="Name" placeholder="Name" value="{{selectedEvent.name}}" required>
             </div>
             <div class="form-group">
               <label class="m-0">Date:</label>
-              <input type="date" class="form-control p-0 position-relative" id="Date" value="{{selectedEvent.date}}">
+              <input type="date" class="form-control p-0 position-relative" id="Date" value="{{#if selectedEvent.date}}{{formatTime selectedEvent.date 'YYYY-MM-DD'}}{{/if}}" required>
+            </div>
+            <div class="d-flex">
+              <div class="form-group f-1 mr-1">
+                <label class="m-0">Start Time (optional):</label>
+                <div class="d-flex align-items-center">
+                  <input type="text" class="form-control mr-1" id="StartTimeH" placeholder="H" value="{{#if selectedEvent.startTime}}{{formatTime selectedEvent.startTime 'h'}}{{/if}}">:
+                  <input type="text" class="form-control mx-1" id="StartTimeM" placeholder="M" value="{{#if selectedEvent.startTime}}{{formatTime selectedEvent.startTime 'mm'}}{{/if}}">
+                  <select id="StartTimeA" class="form-control">
+                    {{#if selectedEvent.startTime}}
+                      {{#if is (formatTime selectedEvent.startTime "a") "am"}}
+                        <option value="AM" selected>AM</option>
+                        <option value="PM">PM</option>
+                      {{else}}
+                        <option value="AM">AM</option>
+                        <option value="PM" selected>PM</option>
+                      {{/if}}
+                    {{else}}
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
+                    {{/if}}
+                    <option>AM</option>
+                    <option>PM</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group f-1 ml-1">
+                <label class="m-0">End Time (optional):</label>
+                <div class="d-flex align-items-center">
+                  <input type="text" class="form-control mr-1" id="EndTimeH" placeholder="H" value="{{#if selectedEvent.endTime}}{{formatTime selectedEvent.endTime 'h'}}{{/if}}">:
+                  <input type="text" class="form-control mx-1" id="EndTimeM" placeholder="M" value="{{#if selectedEvent.endTime}}{{formatTime selectedEvent.endTime 'mm'}}{{/if}}">
+                  <select id="EndTimeA" class="form-control">
+                    <option value="AM">AM</option>
+                    {{#if selectedEvent.endTime}}
+                      {{#if is (formatTime selectedEvent.endTime "a") "pm"}}
+                        <option value="PM" selected>PM</option>
+                      {{/if}}
+                    {{else}}
+                      <option value="PM">PM</option>
+                    {{/if}}
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label class="m-0">Location:</label>
-              <input type="text" class="form-control ml-1" id="Location" placeholder="Location" value="{{selectedEvent.location}}">
+              <input type="text" class="form-control ml-1" id="Location" placeholder="Location" value="{{selectedEvent.location}}" required>
             </div>
             <div class="form-group">
               <label class="m-0">Description:</label>
@@ -85,7 +127,7 @@
           </form>
         </div>
 
-        <div id="Media" class="adminTab d-flex align-items-stretch p-4 h-100">
+        <div id="Media" class="adminTab d-flex align-items-stretch p-4 h-0">
           <div class="d-flex flex-column bg-white m-3 p-2">
             {{#if search "Media" false false false}}
               {{#each search "Media" false false false}}
@@ -123,9 +165,9 @@
                 <option>None</option>
                 {{#each search "Events" false false false}}
                   {{#if is selectedMedia._id _id}}
-                    <option selected>{{name}} - {{date}}</option>
+                    <option selected>{{name}} - {{formatTime date "MM / DD"}}</option>
                   {{else}}
-                    <option>{{name}} - {{date}}</option>
+                    <option>{{name}} - {{formatTime date "MM / DD"}}</option>
                   {{/if}}
                 {{/each}}
               </select>

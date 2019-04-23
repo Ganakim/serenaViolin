@@ -40,21 +40,22 @@ Template.admin.helpers({
 
 Template.admin.events({
   'click .adminLink'(){
+    $('.adminLink').removeClass('bg-primary text-white')
+    $(`#${this}Btn`).addClass('bg-primary text-white')
     $('.adminTab').addClass('h-0').removeClass('h-100')
     $(`#${this.toString()}`).addClass('h-100').removeClass('h-0')
   },
-  'click #ClearEvent'(){
-    form.Name.value = ''
-    form.Date.value = ''
-    form.Location.value = ''
-    form.Description.value = ''
+  'click #ClearEvent'(e){
+    Session.set('selectedEvent', false)
   },
   'click #NewEvent, click #UpdateEvent, click #RemoveEvent'(e){
     e.preventDefault()
     var form = $(e.target).closest('form')[0]
     var formData = {
       name:form.Name.value,
-      date:form.Date.value,
+      date:moment(form.Date.value).valueOf(),
+      startTime:moment(`${form.StartTimeH.value}:${form.StartTimeM.value} ${form.StartTimeA.value}`, 'h:mm a').valueOf(),
+      endTime:moment(`${form.EndTimeH.value}:${form.EndTimeM.value} ${form.EndTimeA.value}`, 'h:mm a').valueOf(),
       location:form.Location.value,
       description:form.Description.value
     }
@@ -70,8 +71,15 @@ Template.admin.events({
     }
     form.Name.value = ''
     form.Date.value = ''
+    form.StartTimeH.value = ''
+    form.StartTimeM.value = ''
+    form.StartTimeA.value = ''
+    form.EndTimeH.value = ''
+    form.EndTimeM.value = ''
+    form.EndTimeA.value = ''
     form.Location.value = ''
     form.Description.value = ''
+    Session.set('selectedEvent', false)
   },
   'click .eventBtn'(){
     Session.set('selectedEvent', this)
