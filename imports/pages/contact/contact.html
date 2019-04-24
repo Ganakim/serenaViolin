@@ -13,13 +13,17 @@
       </h4>
       <hr>
       <div class="d-flex flex-column align-items-center">
-        <div class="card align-items-center w-50 py-5 mb-2">
-          <div>
+        <div class="card flex-row align-items-stretch justify-content-center p-4 mb-2">
+          <div class="d-flex flex-column mr-3">
             <div>Phone/cell: (307)254-4361</div>
             <div class="font-weight-light">leave message or text for first time calls</div>
             <div class="mt-2">Email: <a href="mailto: serenasrp@gmail.com">serenasrp@gmail.com</a></div>
             <div class="mt-2">Or, fill out the form below</div>
-            <!-- No address given? Being home based that makes sense, but as a business...? -->
+          </div>
+          <div class="d-flex flex-column justify-content-between align-items-center ml-3">
+            {{#each socialMedias}}
+              <a href="{{path}}"><i class="{{icon}} fa-2x text-primary"></i></a>
+            {{/each}}
           </div>
         </div>
         <hr class="w-100">

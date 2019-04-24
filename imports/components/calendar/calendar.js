@@ -42,7 +42,6 @@ Template.calendar.helpers({
     return Events.find({date:day}).fetch()
   },
   eventMargins(){
-    console.log(this.name, (1-moment(this.endTime).format('H')/24)*100)
     return `margin-left:calc(${(moment(this.startTime).format('H')/24)*100}% - 4px); margin-right:calc(${(1-moment(this.endTime).format('H')/24)*100}% - 4px);`
   }
 })

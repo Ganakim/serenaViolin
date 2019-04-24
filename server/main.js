@@ -2,21 +2,18 @@ import { Meteor } from 'meteor/meteor'
 
 import '/lib/collections'
 
-var admins = [
-  'WEp6vmbtaY2AJKj2g'
-]
-
 Meteor.startup(() => {
   Accounts.config({
     forbidClientAccountCreation: true
   });
+  if(!Meteor.users.find().fetch()){
+    Accounts.createUser({username:process.env.adminUsername, password:process.env.adminPassword})
+  }
 });
 
 Meteor.methods({
   checkAdmin(){
-    if(Meteor.userId()){
-      return admins.includes(Meteor.userId())
-    }
+    return Meteor.userId() === Meteor.users.find({username:process.env.adminUsername}).fetch()._id
   },
   NewEvent(event){
     Events.insert(event)

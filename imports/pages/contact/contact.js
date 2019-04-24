@@ -3,9 +3,9 @@ import './contact.html'
 Template.contact.helpers({
   socialMedias(){
     return [
-      {name:'youtube',path:'',icon:'youtube'},
-      {name:'pintrest',path:'',icon:'pintrest'},
-      {name:'facebook',path:'',icon:'facebook-square'}
+      {name:'youtube',path:'https://www.youtube.com/channel/UCkykDhA3wOJapMDzVf8o8fQ',icon:'fab fa-youtube'},
+      {name:'pinterest',path:'https://www.pinterest.com/serenaviolinstudio',icon:'fab fa-pinterest'},
+      {name:'facebook',path:'https://www.youtube.com/channel/UCkykDhA3wOJapMDzVf8o8fQ',icon:'fab fa-facebook'}
     ]
   }
 })

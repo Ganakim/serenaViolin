@@ -7,7 +7,7 @@ Template.nav.helpers({
       {text:'About',path:'about',icon:' far fa-user-circle'},
       {text:'Contact',path:'contact',icon:'far fa-envelope'},
       {text:'Events',path:'events',icon:'far fa-calendar'},
-      {text:'Media',path:'media',icon:'far fa-images'},
+      //{text:'Media',path:'media',icon:'far fa-images'},
     ]
   }
 })
