@@ -2,12 +2,15 @@ import { Meteor } from 'meteor/meteor'
 
 import '/lib/collections'
 
+process.env.adminUsername = 'Serenasrp'
+process.env.adminPassword = 'V1ad1V1ol1n'
+
 Meteor.startup(() => {
   Accounts.config({
     forbidClientAccountCreation: true
   })
   console.log('Checking admin')
-  if(Meteor.users.find({username:process.env.adminUsername}).fetch().length == 0){
+  if(!Meteor.users.findOne({username:process.env.adminUsername})){
     console.log('admin not found')
     Meteor.users.remove({})
     Accounts.createUser({username:process.env.adminUsername, password:process.env.adminPassword})
@@ -18,7 +21,7 @@ Meteor.startup(() => {
 
 Meteor.methods({
   checkAdmin(){
-    return Meteor.userId() === Meteor.users.find({username:process.env.adminUsername}).fetch()._id
+    return Meteor.users.findOne(Meteor.userId())._id ===  Meteor.users.findOne({username:process.env.adminUsername})._id
   },
   NewEvent(event){
     Events.insert(event)

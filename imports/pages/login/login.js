@@ -7,7 +7,6 @@ Template.login.events({
       if(err){
         console.log(err)
       }else{
-        console.log(Meteor.user())
         FlowRouter.go('/admin')
       }
     })
