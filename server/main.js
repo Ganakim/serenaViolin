@@ -5,11 +5,16 @@ import '/lib/collections'
 Meteor.startup(() => {
   Accounts.config({
     forbidClientAccountCreation: true
-  });
-  if(!Meteor.users.find().fetch()){
+  })
+  console.log('Checking admin')
+  if(Meteor.users.find({username:process.env.adminUsername}).fetch().length == 0){
+    console.log('admin not found')
+    Meteor.users.remove({})
     Accounts.createUser({username:process.env.adminUsername, password:process.env.adminPassword})
+  }else{
+    console.log('admin found')
   }
-});
+})
 
 Meteor.methods({
   checkAdmin(){
